@@ -111,20 +111,20 @@ public class WeaponBase
         releaseObject.transform.rotation = Quaternion.LookRotation(direction);
         return direction;
     }
-    private Vector3 getCameraHit(){
+    public Vector3 getCameraHit(){
         RaycastHit hit;
         GameObject cam = Camera.main.gameObject;
 
         if(!Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, Mathf.Infinity)){
             Vector3 unitVec = cam.transform.forward.normalized;
 
-            return unitVec*500f;
+            return unitVec*float.MaxValue;
         }
         
         RaycastHit []hits;
         hits = Physics.RaycastAll(cam.transform.position, cam.transform.forward, Mathf.Infinity);
 
-
+        // ignore distance means if the camera hits the playr (which we should ignore) we wont hit player or anything within that ignore distance
         Vector3 ignoreVector = new Vector3(releaseObject.transform.position.x+5f, releaseObject.transform.position.y+5f, releaseObject.transform.position.z+5f);
         float ignoreDistance = Vector3.Distance(cam.transform.position, ignoreVector);
         for(int i = 0; i < hits.Length;i++){
@@ -223,5 +223,15 @@ public class WeaponBase
         }else{
             currentNonLoadedAmmo += ammo;
         }
+    }
+    // MP
+    public virtual GameObject FireMP(){
+        Debug.Log("FIRE MP");
+        // Fire();
+        if (IsFireable()){
+        lastFiredTime = Time.time;
+        currentLoadedAmmo -=1;
+        }
+        return null;
     }
 }

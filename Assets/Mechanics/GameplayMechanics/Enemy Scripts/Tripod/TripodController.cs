@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TripodController : MonoBehaviour
 {
+    
     private CharacterController _controller;
     public float speed;
     public float GroundedOffset = -0.14f;
@@ -21,7 +22,7 @@ public class TripodController : MonoBehaviour
     public int DamagePoints;
 // is debug?
     public bool isDebug =false;
-    
+    public Animator anim;
 // internal
     private float timeToTarget = 1.0f;   
     private bool Grounded = false;
@@ -70,11 +71,11 @@ public class TripodController : MonoBehaviour
         transform.Rotate(0f,rotationSpeed, 0f);
     }
 
-    public void Fire(){
+    public void Fire(bool aimed = false){
         if(Time.time > LastFired + FireRate && Time.time > LastBurstEnd + BurstWait){
             LastFired = Time.time;
             CurrentBurst+=1;
-            HitRay();
+            HitRay(aimed);
             if (CurrentBurst == Bursts){
                 LastBurstEnd = Time.time;
                 CurrentBurst = 0;
@@ -83,16 +84,44 @@ public class TripodController : MonoBehaviour
         
     }
 
-    public void HitRay(){
+    public void Melee(){
+        anim.SetBool("Melee", false);
+        if(Time.time > LastFired + FireRate && Time.time > LastBurstEnd + BurstWait){
+            Debug.Log("ATTACK GIVEN BY MELEE");
+            LastFired = Time.time;
+            CurrentBurst+=1;
+            GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerObject>().takeDamage(DamagePoints);
+
+            // anim set active and false
+            if(anim != null){
+                anim.SetBool("Melee", true);
+                
+            }
+            if (CurrentBurst == Bursts){
+                LastBurstEnd = Time.time;
+                CurrentBurst = 0;
+            }
+        }
+        
+
+    }
+
+    public void HitRay(bool aimed = false){
+        Vector3 direction = new Vector3(0,0,0);
+        if(aimed){
+            direction = GetComponent<ObservationBase>().target.transform.position - FirePoint.position;
+        }else{
+            direction = transform.forward;
+        }
         RaycastHit hit;
-        if(Physics.Raycast(FirePoint.position, transform.forward, out hit, Mathf.Infinity)){
-            Debug.Log(hit.collider.tag);
+        if(Physics.Raycast(FirePoint.position, direction, out hit, Mathf.Infinity)){
+
             if(hit.collider.tag == "Player"){
                 hit.collider.gameObject.GetComponent<PlayerObject>().takeDamage(DamagePoints);
             }
         }
     }
-
+    
     private bool isGrounded(){
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);  
@@ -107,6 +136,8 @@ public class TripodController : MonoBehaviour
     }
     void DebugStuff(){
         Debug.DrawRay(FirePoint.position, FirePoint.forward*100f, Color.red);
+        Debug.DrawRay(FirePoint.position, (GetComponent<ObservationBase>().target.transform.position - FirePoint.position)*100f, Color.black);
+
     }
     void OnGUI()
     {

@@ -15,7 +15,9 @@ public class TankActions : ActionBase
         if (path.corners.Length > 1){
         actions.SlerpToTarget(path.corners[1], SlerpSpeed);
         }
+        
         if(Vector3.Distance(transform.position, wayPointsArray[currentWayPoint].position) < FinishDistance){
+            Debug.Log("MOVING TO THE NEXT POINT");
             NextWayPoint();
         }
         actions.MoveForward();

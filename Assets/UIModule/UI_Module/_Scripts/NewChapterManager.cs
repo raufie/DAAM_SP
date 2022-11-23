@@ -20,15 +20,19 @@ public class NewChapterManager : MonoBehaviour
     public TMP_Dropdown DifficultyDropdown;
 
     public string [] chapterTitles = new string[10];
-
+    public GameObject DisabledObject;
 
     // STATES
     private int currentState;
+    private int unlocked;
 
     public void Start(){
+        unlocked = PlayerPrefs.GetInt("unlocked");
+
         RightBtn.onClick.AddListener(NextChapter);
         LeftBtn.onClick.AddListener(PreviousChapter);
         StartBtn.onClick.AddListener(LoadChapter);
+        SetUIState();
     }
     public void NextChapter(){
         if(currentState <9){
@@ -43,11 +47,22 @@ public class NewChapterManager : MonoBehaviour
         }
     }
     public void SetUIState(){
+        if(currentState+1 <= unlocked){
+            DisabledObject.SetActive(false);
+        }else{
+            DisabledObject.SetActive(true);
+        }
         ChapterText.text = "Chapter "+ (currentState+1);
         TitleText.text = chapterTitles[currentState];
         ChapterImage.sprite = sprites[currentState];
     }
     public void LoadChapter(){
+        if(currentState+1 <= unlocked){
+        // Debug.Log("Trynna switch a level");
         StateManager.StartNew(DifficultyDropdown.value, currentState+1);
+        
+        }else {
+            // Debug.Log("not gonna do a thing");
+        }
     }
 }

@@ -6,11 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UIModule/UI_Module/Scenes/SinglePlayerUI.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/_scenes/SinglePlayerUI 1.unity
+    guid: f2c2581970ac8c74ab2121ba204f1b2c
   - enabled: 1
-    path: Assets/_scenes/AudioEnv 1.unity
+    path: Assets/_scenes/LEVELS/SP_LEVEL1.unity
+    guid: 9a2451aface64bb4eb83794554e1bbcb
+  - enabled: 1
+    path: Assets/_scenes/BASE_SINGLEPLAYER_LEVEL.unity
     guid: afabd3b706938984f848c08b07f5bf79
+  - enabled: 1
+    path: Assets/_scenes/MultiplayerUI.unity
+    guid: b9e525627d757ba4ba7a0e7786743c84
+  - enabled: 1
+    path: Assets/_scenes/BASE_MP.unity
+    guid: 981984f6988af8d4594c4f203caff99d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
       type: 2}

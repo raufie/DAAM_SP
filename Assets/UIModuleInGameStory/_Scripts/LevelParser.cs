@@ -47,5 +47,10 @@ public class LevelParser : MonoBehaviour
     public void SetMilestone(int milestone){
         data.currentMilestone = milestone;
     }
+    public void SetDifficulty(int difficulty){
+        if(difficulty >=0 && difficulty <=2 ){
+            data.difficulty = difficulty;
+        }
+    }
 
 }

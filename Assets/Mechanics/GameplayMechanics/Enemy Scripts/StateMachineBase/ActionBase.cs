@@ -25,6 +25,7 @@ public class ActionBase : MonoBehaviour
     }
     void Start(){
         // SetAttributes();
+        player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerObject>().BodyTarget;
     }
     void FixedUpdate(){
         // Patrol();

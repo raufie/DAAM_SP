@@ -162,4 +162,13 @@ public class StateManager
             return null;
         }
     }
+    public static void LoadNewChapter(int diff, int chapter){
+        // get difficulty from player prefs
+        int prevUnlocked = PlayerPrefs.GetInt("unlocked");
+        if(prevUnlocked < chapter){
+            PlayerPrefs.SetInt("unlocked", chapter);
+        }
+        StartNew(diff, chapter);
+
+    }
 }

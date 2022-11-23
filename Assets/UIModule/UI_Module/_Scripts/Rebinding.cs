@@ -55,7 +55,6 @@ public class Rebinding : MonoBehaviour
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
     
     void Awake(){
-        deleteBindings();
         controls = new InputMaster();
         // THIS ASSIGNMENT IS VIP AND STATIC
         WeaponSelection1 = controls.Player.WeaponSelection1;
@@ -246,13 +245,16 @@ public class Rebinding : MonoBehaviour
     }
 
     public void OnEnable(){
-        // LOADING
+        LoadSettings();
+        
+    }
+    private void LoadSettings(){
+           // LOADING
         mouseSlider.value = PlayerPrefs.GetFloat("sensitivity");
         var rebinds = PlayerPrefs.GetString("rebinds");
         if(!string.IsNullOrEmpty(rebinds)){
             controls.LoadBindingOverridesFromJson(rebinds);
         }
-        
     }
     public void OnDisable(){
         // SAVING
@@ -261,8 +263,6 @@ public class Rebinding : MonoBehaviour
     }
     public void SaveBindings(){
  
-       Debug.Log(InputControlPath.ToHumanReadableString(
-            Look.bindings[0].processors));
         var rebinds = controls.SaveBindingOverridesAsJson();
         PlayerPrefs.SetString("rebinds", rebinds);
         PlayerPrefs.SetFloat("sensitivity", mouseSlider.value);
@@ -306,18 +306,6 @@ public class Rebinding : MonoBehaviour
                 InputControlPath.HumanReadableStringOptions.OmitDevice
             );
         }
-        // // SENSITIVITY
-        // Debug.Log(InputControlPath.ToHumanReadableString(Look.bindings[0].processors));
-
-        // int sensitivityIndex = Look.GetBindingIndexForControl(Look.controls[0]);
-        // Debug.Log(InputControlPath.ToHumanReadableString(Look.bindings[sensitivityIndex].processors));
-
-        // string split_val = InputControlPath.ToHumanReadableString(Look.bindings[sensitivityIndex]
-        // .processors
-        // .Split(',')[1]
-        // .Split('=')[1]      
-        // );
-        // split_val = split_val.Substring(2,split_val.Length-3);
         float split_val = PlayerPrefs.GetFloat("sensitivity");
         mouseSlider.value = split_val;
 

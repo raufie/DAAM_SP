@@ -36,23 +36,33 @@ public class MovementInput : MonoBehaviour
     [Range(0.0f, 0.3f)]
     public float RotationSmoothTime = 0.12f;
     public float SENSITIVITY;
+    // SPRINT CAPPING
+    private float LastSprintTime;
+    public float SprintLimit;
+    
     // CAMS
     void Awake(){
         playerObject = GetComponent<InputManagement>().Player;
         controller = playerObject.GetComponent<ThirdPersonController>();
         controls = new InputMaster();
+        CinemachineCameraTarget = controller.CinemachineCameraTarget;
     }
 
     void Update(){
+        
         // /WASD
         bool isCrouching = controls.Player.Crouch.ReadValue<float>() > 0.0f;
         bool isSprinting = controls.Player.Sprint.ReadValue<float>() == 1.0f ;
         Vector2 moveVector = controls.Player.Move.ReadValue<Vector2>();
-        controller.Move(moveVector, isSprinting, isCrouching);
         // JUMP
         bool jumpInput = controls.Player.Jump.triggered;
         bool isAiming = controls.Player.Aim.ReadValue<float>() == 1.0;
         bool isHoldingShoot = controls.Player.HoldShoot.ReadValue<float>() == 1.0;
+        if(isHoldingShoot == true){
+            isAiming = true;
+        }
+        controller.Move(moveVector, isSprinting, isCrouching, isAiming);
+
         controller.Jump(jumpInput, isAiming, isHoldingShoot);
         // UPDATE LOOK VECTOR
        _lookVector = controls.Player.Look.ReadValue<Vector2>();
@@ -64,7 +74,13 @@ public class MovementInput : MonoBehaviour
         bool isShooting = controls.Player.Shoot.triggered ;
         bool isAiming = controls.Player.Aim.ReadValue<float>() >0.0;
         bool isHolding = controls.Player.HoldShoot.ReadValue<float>()>0.0 ;
+
+        if(isHolding == true){
+            isAiming = true;
+        }
+        // Debug.Log(isAiming);
         controller.Aim(isShooting, isAiming, isHolding, isSprinting);
+        
     }
 
     private void LateUpdate(){

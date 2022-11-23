@@ -41,6 +41,19 @@ public class SemiAutomaticWeapon : WeaponBase
         }
         base.Fire();
     }
-    
+    public override GameObject FireMP(){
+        
+        if (IsFireable()){
+        base.FireMP();
+        RaycastHit hit = GetRaycastHit();
+            if(hit.collider != null){
+                if (hit.collider.tag == "Player") {
+                    return hit.collider.gameObject;
+                }
+            }
+        }
+        return null;
+        
+    }
     
 }

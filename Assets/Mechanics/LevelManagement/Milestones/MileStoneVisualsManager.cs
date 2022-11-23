@@ -11,10 +11,17 @@ public class MileStoneVisualsManager : MonoBehaviour
     public float SpriteVisibilityRadius = 20f;
     public float LabelVisibilityRadius = 10f;
     public bool isViewing;
-
+    public bool isEnabled;
     // Update is called once per frame
+    void Start(){
+        if(!isEnabled){
+            LabelObject.SetActive(false);
+            SpriteObject.SetActive(false);
+        }
+    }
     void Update()
     {
+        if(isEnabled){
         LookAtCam(SpriteObject);
         LookAtCam(LabelObject);
 
@@ -34,6 +41,7 @@ public class MileStoneVisualsManager : MonoBehaviour
         else{
             SpriteObject.SetActive(false);
             LabelObject.SetActive(false);
+        }
         }
     }
     void LookAtCam(GameObject obj){

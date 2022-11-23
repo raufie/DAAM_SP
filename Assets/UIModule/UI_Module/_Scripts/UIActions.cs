@@ -6,9 +6,7 @@ public class UIActions : MonoBehaviour
 {
     public Rebinding rebinding;
     public QualityManager qualityManager;
-    void Start(){
-        
-    }
+
     public void saveAudioSettings(float master, float sfx, float music){
         PlayerPrefs.SetFloat("masterVolume", master);
         PlayerPrefs.SetFloat("sfxVolume", sfx);

@@ -12,7 +12,7 @@ public class WeaponsInput: MonoBehaviour
     public GameObject playerObject;
 
     void Awake(){
-        playerObject = GetComponent<InputManagement>().Player;
+        playerObject = GameObject.FindGameObjectsWithTag("Player")[0];
         weaponsManager = playerObject.GetComponent<WeaponsManager>();
         controls = new InputMaster();
 
@@ -26,7 +26,13 @@ public class WeaponsInput: MonoBehaviour
     }
 
     void EmitFire(InputAction.CallbackContext ctx){
-        weaponsManager.FireSemiWeapon();
+        
+        if(weaponsManager.GetCurrentWeapon().IsFireable()){
+            ThirdPersonController controller = playerObject.gameObject.GetComponent<ThirdPersonController>();
+            // controller.Aim(true, true, true, false);
+            weaponsManager.FireSemiWeapon();
+        }
+
     }
      void Update(){
             bool isFirePressedDown = controls.Player.HoldShoot.ReadValue<float>() > 0.1f;
@@ -40,7 +46,10 @@ public class WeaponsInput: MonoBehaviour
         //     weaponsManager.FireSemiWeapon();
         //     Debug.Log("weapon input fire");
         // };
-        
+        if(controls == null){
+            controls = new InputMaster();
+            Config.LoadBindings(controls);
+        }
         controls.Player.Shoot.performed+=EmitFire;
         controls.Player.Reload.performed  += context=> weaponsManager.ReloadWeapon();
 

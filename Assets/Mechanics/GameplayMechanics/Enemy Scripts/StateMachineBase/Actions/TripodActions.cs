@@ -3,8 +3,15 @@ using UnityEngine;
 public class TripodActions : ActionBase
 {
     protected TripodController actions;
-    private float CalibrationThreshold = 4f;
+    public float CalibrationThreshold = 4f;
     public float CalibrationSlerpSpeed = 0.05f;
+    public enum TripodType {
+        BASIC,
+        KAIJU,
+        FINAL
+    }
+    public TripodType type = TripodType.BASIC;
+    public float MeleeAttackRadius = 20f;
     void Awake()
     {
         actions = GetComponent<TripodController>();
@@ -29,7 +36,7 @@ public class TripodActions : ActionBase
     }
 
     public override void Calibrate(){
-        Debug.Log(player);
+
         actions.SlerpToTarget(player.transform.position, CalibrationSlerpSpeed);
 
         float angle = Vector3.Angle(actions.FirePoint.forward,player.transform.position - actions.FirePoint.position);
@@ -43,8 +50,19 @@ public class TripodActions : ActionBase
        
     public override void Attack(){
         actions.SlerpToTarget(player.transform.position, CalibrationSlerpSpeed);
-
-        actions.Fire();
+        if(type == TripodType.KAIJU){
+            actions.Fire(true);
+        }else if(type == TripodType.BASIC){
+            actions.Fire();
+        }else if (type == TripodType.FINAL){
+            // Debug.Log(Vector3.Distance(player.transform.position, transform.position));
+            if(Vector3.Distance(player.transform.position, transform.position) < MeleeAttackRadius){
+                actions.Melee();
+            }else{
+            actions.Fire(true);
+            }
+        }
+        
         // actions.Target = player.GetComponent<Transform>();
         // actions.Launch();
     }

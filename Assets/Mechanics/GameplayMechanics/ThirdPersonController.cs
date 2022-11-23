@@ -13,6 +13,7 @@ public class ThirdPersonController : MonoBehaviour
     public float MoveSpeed = 2.0f;
 
     [Tooltip("Sprint speed of the character in m/s")]
+    public float DefaultSpeed = 5.335f;
     public float SprintSpeed = 5.335f;
 
     [Tooltip("Acceleration and deceleration")]
@@ -103,7 +104,19 @@ public class ThirdPersonController : MonoBehaviour
 
     
     // CURSOR
+
     public bool cursorDisabled = true;
+    
+    // SPRINT CAPPING
+    float lastSprintTime = 0f;
+
+    float sprintTime = 4f;
+    public float maxSprintAbility  = 4f;
+    float speed = 5f; 
+    float sprintSpeed = 10f;
+    float sprintAbility = 4f;
+    float lastJumped = 0f;
+    float jumpTime = 2f;
     void Awake(){
         controls = new InputMaster();
 
@@ -130,21 +143,37 @@ public class ThirdPersonController : MonoBehaviour
         if(cursorDisabled){
         hideMouse();
         }
+        
     }
     void FixedUpdate(){
 
         AddGravity();
         GroundedCheck();
-        
+        if(Time.time - lastSprintTime > 0.25f){
+            affectSprintAbility(1f*Time.deltaTime);
+        }
+        // Debug.Log(sprintAbility);
+        if(Grounded){
+             _animator.SetBool(isJumpingHash, false);
+        }
 
     }
 
   
 
-    public void Move(Vector2 moveVector, bool isSprinting, bool isCrouching) {
+    public void Move(Vector2 moveVector, bool isSprinting, bool isCrouching, bool isAiming = false) {
             // set target speed based on move speed, sprint speed and if sprint is pressed
             // IF CROUCHING DIVIDE THE SPEED by some number
             // bool isCrouching = controls.Player.Crouch.ReadValue<float>() > 0.0f;
+            if(isAiming == false){
+            _animator.SetBool(isAimingHash, false);
+
+            }
+            if(isSprinting){
+                affectSprintAbility(-1f*Time.deltaTime);
+                lastSprintTime = Time.time;
+            }
+            
             float _SprintSpeed = SprintSpeed;
             float _MoveSpeed = MoveSpeed;
             if(isCrouching){
@@ -152,7 +181,12 @@ public class ThirdPersonController : MonoBehaviour
                 _MoveSpeed *=0.70f;
             }
             // float targetSpeed = controls.Player.Sprint.ReadValue<float>() == 1.0f ? _SprintSpeed : MoveSpeed;
+            if(sprintAbility == 0){
+                isSprinting = false;
+            }
             float targetSpeed = isSprinting ? _SprintSpeed : MoveSpeed;
+            
+
 
             
                 // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
@@ -202,7 +236,9 @@ public class ThirdPersonController : MonoBehaviour
                     RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
+                if(!isAiming){
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
             }
 
 
@@ -268,15 +304,21 @@ public class ThirdPersonController : MonoBehaviour
     }
     public void Jump(bool jumpInput , bool isAiming, bool isHoldingShoot)
         {
+            if(Time.time < lastJumped+jumpTime){
+                return;
+            }
             if (Grounded && !isAiming && !isHoldingShoot)
             {
+                if(jumpInput){
+                lastJumped = Time.time;
+                }
                 // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;
 
                 // update animator if using character
                 if (_hasAnimator)
                 {
-                    _animator.SetBool(isJumpingHash, false);
+                    // _animator.SetBool(isJumpingHash, false);
                     // _animator.SetBool(_animIDFreeFall, false);
                 }
 
@@ -404,6 +446,9 @@ public class ThirdPersonController : MonoBehaviour
             if (lfAngle > 360f) lfAngle -= 360f;
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
-    
+    public void affectSprintAbility(float affectAmount){
+        float newSprintAbility = sprintAbility + affectAmount;
+        sprintAbility = Mathf.Clamp(newSprintAbility, 0f, maxSprintAbility);
+    }
 
 }

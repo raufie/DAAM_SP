@@ -47,6 +47,9 @@ public class GrenadeGun : WeaponBase
         rocketInstance.GetComponent<RocketProjectile>().timer = explosionTimer;
         rocketInstance.GetComponent<RocketProjectile>().radius = explosionRadius;
         rocketInstance.GetComponent<RocketProjectile>().damagePoints = damagePoints;
+        if(direction == new Vector3(23f/0, 23f/0, 23f/0)){
+            direction = releaseObject.transform.forward;
+        }
         rocketInstance.GetComponent<RocketProjectile>().Launch(direction);
         lastFiredTime = Time.time;
  

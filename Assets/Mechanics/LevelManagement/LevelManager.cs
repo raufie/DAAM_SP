@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public GameObject [] Enemies;
-    private DifficultyManager difficultyManager;
+    public DifficultyManager difficultyManager;
     private EnemyManager enemyManager;
     public LevelParser levelParser;
     public GameObject Player;
@@ -152,5 +152,8 @@ public class LevelManager : MonoBehaviour
         
         milestonesManager.SwitchToMilestone(levelParser.data.currentMilestone);
     }
-
+    public void SetDifficulty(int difficulty){
+        levelParser.SetDifficulty(difficulty);
+        difficultyManager.SetDifficultyProfiles(difficulty);
+    }
 }

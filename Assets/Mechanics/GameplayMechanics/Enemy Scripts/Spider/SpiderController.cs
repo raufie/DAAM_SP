@@ -46,6 +46,7 @@ public class SpiderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Target =  GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerObject>().HeadTarget.transform;
         CalibrateVelocity(timeToTarget);
 
         _controller = GetComponent<CharacterController>();

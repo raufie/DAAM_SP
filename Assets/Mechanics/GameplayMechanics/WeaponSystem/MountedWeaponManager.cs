@@ -54,6 +54,8 @@ public class MountedWeaponManager : MonoBehaviour
     // objects
     public GameObject releaseObject;
     public GameObject rocketPrefab;
+    public GameObject sparkMachine;
+    public GameObject sparkGrenade;
     // INTERNAL
     private bool UsePressed;
     // Start is called before the first frame update
@@ -91,7 +93,17 @@ public class MountedWeaponManager : MonoBehaviour
         }
         bool isFirePressedDown = controls.Player.HoldShoot.ReadValue<float>() > 0.1f;
         if (isFirePressedDown && isMounted){
-            weapon.Fire();
+            
+            if(weapon.IsFireable()){
+                weapon.Fire();
+                if(weaponType == WeaponType.MachineGun){
+                    Instantiate(sparkMachine, releaseObject.transform.position, Quaternion.Euler(0,180f, 0));
+                }else{
+                    Instantiate(sparkGrenade, releaseObject.transform.position, Quaternion.Euler(0,180f, 0));
+
+                }
+
+            }
         }
         weapon.DrawRay();
         

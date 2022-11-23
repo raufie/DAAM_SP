@@ -24,11 +24,12 @@ public class InputManagement : MonoBehaviour
         // AGGREGATIONS 
        
         // new EnvironmentMapper();
+        Player = GameObject.FindGameObjectsWithTag("Player")[0];
         
     }
     void Start(){
-        // movementInput = GetComponent<MovementInput>();
-        // weaponsInput = GetComponent<WeaponsInput>();
+        movementInput = GetComponent<MovementInput>();
+        weaponsInput = GetComponent<WeaponsInput>();
     }
 
    
@@ -55,7 +56,7 @@ public class InputManagement : MonoBehaviour
 
     }
     public void enable(){
-        
+     
         movementInput.enabled = true;
         weaponsInput.enabled = true;
         weaponsInput.enable();

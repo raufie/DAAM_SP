@@ -129,6 +129,8 @@ MonoBehaviour:
   timer: 0
   damagePoints: 0
   radius: 0
+  ExplosionPrefab: {fileID: 6395068507869165326, guid: 180b8d26899824fa8884b05d27ab33c2,
+    type: 3}
 --- !u!1001 &8966149771799378640
 PrefabInstance:
   m_ObjectHideFlags: 0

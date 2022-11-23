@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Oldsave-239582341
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7abadc5593b1c84490f9e73e77f174a, type: 2}
-  m_sharedMaterial: {fileID: 4015944888229456743, guid: e7abadc5593b1c84490f9e73e77f174a,
+  m_fontAsset: {fileID: 11400000, guid: 33f8ca77c7b855442b42f16b003e7de8, type: 2}
+  m_sharedMaterial: {fileID: 6308602211909808614, guid: 33f8ca77c7b855442b42f16b003e7de8,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -202,8 +202,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Chapter 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7abadc5593b1c84490f9e73e77f174a, type: 2}
-  m_sharedMaterial: {fileID: 4015944888229456743, guid: e7abadc5593b1c84490f9e73e77f174a,
+  m_fontAsset: {fileID: 11400000, guid: 33f8ca77c7b855442b42f16b003e7de8, type: 2}
+  m_sharedMaterial: {fileID: 6308602211909808614, guid: 33f8ca77c7b855442b42f16b003e7de8,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -457,8 +457,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 12-23-2042 10:00 am
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e7abadc5593b1c84490f9e73e77f174a, type: 2}
-  m_sharedMaterial: {fileID: 4015944888229456743, guid: e7abadc5593b1c84490f9e73e77f174a,
+  m_fontAsset: {fileID: 11400000, guid: 33f8ca77c7b855442b42f16b003e7de8, type: 2}
+  m_sharedMaterial: {fileID: 6308602211909808614, guid: 33f8ca77c7b855442b42f16b003e7de8,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -577,7 +577,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btn: {fileID: 7567594243976531963}
   Attribute1: {fileID: 7567594243214752896}
-  Attribute2: {fileID: 7567594244181760448}
+  Attribute2: {fileID: 2970620561557278914}
+  Attribute3: {fileID: 7567594244181760448}
 --- !u!1 &7567594245020080219
 GameObject:
   m_ObjectHideFlags: 0

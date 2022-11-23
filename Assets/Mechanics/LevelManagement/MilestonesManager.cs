@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class MilestonesManager : MonoBehaviour
 {
     public MilestoneBase [] Milestones;
     public int CurrentMilestone;
     public bool isDebug;
+    public int CURRENT_LEVEL;
     void Start(){
         if(isDebug ){
             for(int i =0; i < Milestones.Length;i++){
@@ -31,14 +31,17 @@ public class MilestonesManager : MonoBehaviour
 
         
         CurrentMilestone = milestone - 1;
-        CompleteMilestone();
+        CompleteMilestone(true);
     }
     void FixedUpdate(){
         CheckForUpdates();
         
     }
-    void CompleteMilestone(){
+    void CompleteMilestone(bool isForSkipping = false){
         if(Milestones[CurrentMilestone]!= null){
+        if(!isForSkipping){
+            GetComponent<NotificationsManager>().ShowAlert("Milestone Completed", Milestones[CurrentMilestone].Label, Notification.NotificationType.SUCCESS, 2);
+        }
         Destroy(Milestones[CurrentMilestone].gameObject);
         }    
     
@@ -60,7 +63,9 @@ public class MilestonesManager : MonoBehaviour
             CompleteMilestone();
             
         }else if (CurrentMilestone == Milestones.Length){
+            
             Debug.Log("ALL MILESTONES COMPLETED");
+            FinishLevel();
         }
     }
     public GameObject GetCurrentMilestone(){
@@ -69,6 +74,12 @@ public class MilestonesManager : MonoBehaviour
         }
         return Milestones[CurrentMilestone].gameObject;
         
+    }
+    public void FinishLevel(){
+            // Get difficulty manager's diff from level manager
+            int diff = (int)GameObject.FindGameObjectsWithTag("LevelManager")[0].GetComponent<DifficultyManager>().difficultyLevel;
+            StateManager.LoadNewChapter(diff, CURRENT_LEVEL+1);
+
     }
 
 }

@@ -19,6 +19,10 @@ public class ObservationBase : MonoBehaviour
     void Start(){
         
         actions = GetComponent<ActionBase>();
+        // get target
+        target =  GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerObject>().BodyTarget;
+
+
     }
     public bool IsPlayerVisible(){
         // combination of (is player blocked and is it in the viewing angle)

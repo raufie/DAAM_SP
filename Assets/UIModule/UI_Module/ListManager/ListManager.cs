@@ -51,15 +51,16 @@ public class ListManager : MonoBehaviour
         SelectedIndex = -1;
         InitializedObjects = new GameObject [options.Length];
         for(int i = 0; i< options.Length; i++){
+            // Debug.Log(options[i].attr2);
             int temp_i = i;
 
             GameObject Obj = Instantiate(ListObjectPrefab, new Vector3(0f,0f,0f), Quaternion.identity);
-            Obj.transform.parent = ListGroup.transform;
+            Obj.transform.SetParent(ListGroup.transform);
             Obj.transform.localScale = new Vector3(1,1,1);
 
             Obj.GetComponent<ListItem>().setAttribute1(options[i].attr1);
             Obj.GetComponent<ListItem>().setAttribute2(options[i].attr2);
-            Obj.GetComponent<ListItem>().setAttribute2(options[i].attr3);
+            Obj.GetComponent<ListItem>().setAttribute3(options[i].attr3);
             Obj.GetComponent<ListItem>().setIndex(i);
 // attaching btn listeners
             Obj.GetComponent<ListItem>().btn.onClick.AddListener(()=>{
@@ -71,7 +72,7 @@ public class ListManager : MonoBehaviour
         }
     }
     void RemoveOption(){
-        Debug.Log("removing");
+        // Debug.Log("removing");
     }
 
     void AddListeners(){

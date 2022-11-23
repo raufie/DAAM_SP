@@ -13,12 +13,13 @@ public class RocketProjectile : MonoBehaviour
     private float armedTimer;//so that it doesn't collide and destroy the player
     private AudioManager audioManager;
     private GameObject rocketPropulsionAudioObject;
+    public GameObject ExplosionPrefab;
     void Start()
     {
         audioManager = GameObject.FindGameObjectsWithTag("AudioManager")[0].GetComponent<AudioManager>();
 
         rocketPropulsionAudioObject = audioManager.fireTrackingSFXEvent("RocketExhaust", gameObject);
-        armedTimer = 0.05f + Time.time;
+        armedTimer = 0.001f + Time.time;
         // Debug.Log(Vector3.Distance(transform.position, new Vector3(transform.position.x+5f, transform.position.y+5f, transform.position.z+5f)));
         Debug.Log(transform.position);
     }
@@ -33,6 +34,9 @@ public class RocketProjectile : MonoBehaviour
              if (Time.time> armedTimer ){
             gameObject.GetComponent<BoxCollider>().enabled =true;
         }
+
+
+        // gameObject.GetComponent<BoxCollider>().enabled =true;
     }
 
     // launch
@@ -45,7 +49,7 @@ public class RocketProjectile : MonoBehaviour
     // explode
     public void Explode(int damagePoints, float explosionRadius){
         RaycastHit[] hits;
-
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
         hits = Physics.SphereCastAll(transform.position, explosionRadius, transform.forward, explosionRadius);
         
         foreach (var hit in hits)

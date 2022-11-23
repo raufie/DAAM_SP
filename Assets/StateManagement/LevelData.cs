@@ -23,6 +23,7 @@ public class LevelData
     public string enemies;
     public bool isNew;
     public int difficulty;
+    // 0,1,2
     public EntityData [] enemyData;
     public EntityData playerData;
     // WEAPONS

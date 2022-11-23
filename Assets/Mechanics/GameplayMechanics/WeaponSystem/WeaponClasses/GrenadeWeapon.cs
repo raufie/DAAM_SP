@@ -59,10 +59,32 @@ public class GrenadeWeapon : WeaponBase
         grenadeInstance.GetComponent<GrenadeProjectile>().timer = grenadeTimer;
         grenadeInstance.GetComponent<GrenadeProjectile>().radius = explosionRadius;
         grenadeInstance.GetComponent<GrenadeProjectile>().damagePoints = damagePoints;
+        Debug.Log(direction);
+        if(direction == Vector3.zero){
+            Debug.Log("daddy chil");
+        }
         grenadeInstance.GetComponent<GrenadeProjectile>().Launch(direction);
         
         }
         base.Fire();
+    }
+    public override GameObject FireMP(){
+        if (IsFireable()){
+            Debug.Log("Instantiating");
+            Vector3 direction = GetMouseDirection();
+            GameObject grenadeInstance = InstanceManager.InstantiateStatic(grenadePrefab,releaseObject.transform.position, Quaternion.identity);
+            grenadeInstance.GetComponent<MPGrenadeProjectile>().timer = grenadeTimer;
+            grenadeInstance.GetComponent<MPGrenadeProjectile>().radius = explosionRadius;
+            grenadeInstance.GetComponent<MPGrenadeProjectile>().damagePoints = damagePoints;
+            
+            if(direction == Vector3.zero){
+                   Debug.Log("daddy chil");
+            }
+            grenadeInstance.GetComponent<MPGrenadeProjectile>().Launch(direction);
+            
+            }
+        base.FireMP();
+        return null;
     }
     
 }

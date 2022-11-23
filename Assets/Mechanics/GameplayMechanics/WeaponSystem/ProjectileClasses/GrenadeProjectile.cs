@@ -10,7 +10,7 @@ public class GrenadeProjectile : MonoBehaviour
     public int damagePoints;
     public float radius;
     private AudioManager audioManager;
-
+    public GameObject ExplosionPrefab;
     void Start()
     {
     audioManager = GameObject.FindGameObjectsWithTag("AudioManager")[0].GetComponent<AudioManager>();
@@ -35,6 +35,8 @@ public class GrenadeProjectile : MonoBehaviour
 
     // explode
     public void Explode(int damagePoints, float grenadeExplosionRadius){
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+
         RaycastHit[] hits;
         hits = Physics.SphereCastAll(transform.position, grenadeExplosionRadius, transform.forward, grenadeExplosionRadius);
 

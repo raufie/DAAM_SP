@@ -12,6 +12,15 @@ TagManager:
   - InputManagement
   - CONFIGURATION
   - LevelManager
+  - GameManager
+  - HudManager
+  - p1
+  - p2
+  - p3
+  - p4
+  - p5
+  - p6
+  - PlayerWrapper
   layers:
   - Default
   - TransparentFX

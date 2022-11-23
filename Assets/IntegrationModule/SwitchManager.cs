@@ -31,6 +31,7 @@ public class SwitchManager : MonoBehaviour
 
     }
     public void Switch(){
+
         if(isOpen){
                 EnableInputs();
             }else{
@@ -43,7 +44,7 @@ public class SwitchManager : MonoBehaviour
     private void OnDisable(){
         controls.Disable();
     }
-    private void EnableInputs(){
+    public void EnableInputs(){
             mechanicsInput.enabled = true;
             mechanicsInput.enable();
             UIObject.SetActive(false);
@@ -51,7 +52,7 @@ public class SwitchManager : MonoBehaviour
             Time.timeScale = 1f;
             isOpen = false;
     }
-    private void DisableInputs(){
+    public void DisableInputs(){
             mechanicsInput.disable();
             UIObject.SetActive(true);
             Time.timeScale = 0f;

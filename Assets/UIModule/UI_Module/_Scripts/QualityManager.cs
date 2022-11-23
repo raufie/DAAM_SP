@@ -38,7 +38,7 @@ public class QualityManager : MonoBehaviour
         // 2: medium
         // 3: high
         // Apply Settings
-        Debug.Log("applying settings");
+        // Debug.Log("applying settings");
         Screen.SetResolution(resX, resY, true);
         QualitySettings.SetQualityLevel(quality);
     }

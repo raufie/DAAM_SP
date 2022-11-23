@@ -64,5 +64,22 @@ public class RocketLauncherWeapon : WeaponBase
         return rotation;
 
     }
+    public override GameObject FireMP(){
+        if (IsFireable()){
+        // GameManager gameManager = GameObject.FindGameObjectsWithTag("GameManager")[0].GetComponent<GameManager>();
+        Vector3 direction = GetMouseDirection();
+
+        // gameManager.LaunchRocket(rocketPrefab, releaseObject.transform.position, getRotationToTarget(), explosionTimer, explosionRadius, damagePoints, direction);
+
+        GameObject rocketInstance = InstanceManager.InstantiateStatic(rocketPrefab,releaseObject.transform.position, getRotationToTarget());
+        rocketInstance.GetComponent<MPRocketProjectile>().timer = explosionTimer;
+        rocketInstance.GetComponent<MPRocketProjectile>().radius = explosionRadius;
+        rocketInstance.GetComponent<MPRocketProjectile>().damagePoints = damagePoints;
+        rocketInstance.GetComponent<MPRocketProjectile>().Launch(direction);
+        
+        }
+        base.FireMP();
+        return null;
+    }
     
 }

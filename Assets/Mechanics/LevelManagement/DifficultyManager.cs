@@ -29,8 +29,8 @@ public class DifficultyManager : MonoBehaviour
         NewProfile(0.85f, 10)
     };
     DifficultyProfile [] TankDifficulties = new DifficultyProfile[3]{
-        NewProfile(0.10f, 10),
-        NewProfile(0.25f, 15),
+        NewProfile(0.20f, 10),
+        NewProfile(0.35f, 15),
         NewProfile(0.85f, 30)
     };
     // Difficulty
@@ -50,10 +50,15 @@ public class DifficultyManager : MonoBehaviour
         Enemies = GetComponent<LevelManager>().Enemies;
         if (diff >= 0 && diff <= 2){
             difficultyLevel =(DifficultyLevel)(diff);
+        }else {
+            return;
         }
 
         for (int i = 0; i < Enemies.Length; i++){
             GameObject enemyObject = Enemies[i];
+            if(enemyObject == null){
+                continue;
+            }
             if((enemyObject.GetComponent("DroneController") as DroneController) != null){
                 // set drone difficulty here
                 enemyObject.GetComponent<DroneController>().speed = DroneDifficulties[(int)difficultyLevel].Speed;
