@@ -17,16 +17,19 @@ public class TabToggler : MonoBehaviour
     public bool UpdateSprite = false;
     void Start()
     {
-            currentTab = 0;
-            int i = 0;
-            while(i < tabs.Length){
-                int j = i;
-                tabs[j].GetComponent<Button>().onClick.AddListener(()=>{toggleToTab(j);});
-                i++;
-            }          
-            if(UpdateSprite){
-                setCurrentTab(0);
-            }
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        currentTab = 0;
+        int i = 0;
+        while(i < tabs.Length){
+            int j = i;
+            tabs[j].GetComponent<Button>().onClick.AddListener(()=>{toggleToTab(j);});
+            i++;
+        }          
+        if(UpdateSprite){
+            setCurrentTab(0);
+        }
+            
     }
 
 
@@ -44,6 +47,7 @@ public class TabToggler : MonoBehaviour
     }
     void setCurrentTab(int to){
         currentTab = to;
+        TabToggler.curr = to;
         // others should be come inactive
         if(!UpdateSprite){
             return;

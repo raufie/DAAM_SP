@@ -21,13 +21,14 @@ public class RocketProjectile : MonoBehaviour
         rocketPropulsionAudioObject = audioManager.fireTrackingSFXEvent("RocketExhaust", gameObject);
         armedTimer = 0.001f + Time.time;
         // Debug.Log(Vector3.Distance(transform.position, new Vector3(transform.position.x+5f, transform.position.y+5f, transform.position.z+5f)));
-        Debug.Log(transform.position);
+     
     }
 
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+
         if ( Time.time > timeStarted + timer){
             Explode(damagePoints, radius);
         }
@@ -41,7 +42,9 @@ public class RocketProjectile : MonoBehaviour
 
     // launch
     public void Launch(Vector3 direction){
+
         timeStarted = Time.time;
+        armedTimer = 0.01f + Time.time;
         gameObject.GetComponent<Rigidbody>().velocity = direction*speed;
     }
 

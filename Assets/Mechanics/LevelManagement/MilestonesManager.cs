@@ -7,6 +7,8 @@ public class MilestonesManager : MonoBehaviour
     public int CurrentMilestone;
     public bool isDebug;
     public int CURRENT_LEVEL;
+    public GameObject LevelEndLoadingPrefab;
+    public GameObject ScreenPoint;
     void Start(){
         if(isDebug ){
             for(int i =0; i < Milestones.Length;i++){
@@ -38,6 +40,7 @@ public class MilestonesManager : MonoBehaviour
         
     }
     void CompleteMilestone(bool isForSkipping = false){
+        
         if(Milestones[CurrentMilestone]!= null){
         if(!isForSkipping){
             GetComponent<NotificationsManager>().ShowAlert("Milestone Completed", Milestones[CurrentMilestone].Label, Notification.NotificationType.SUCCESS, 2);
@@ -47,7 +50,11 @@ public class MilestonesManager : MonoBehaviour
     
 
         CurrentMilestone +=1;
+        if(CurrentMilestone >= Milestones.Length){
+            return;
+        }
         if(Milestones[CurrentMilestone] == null){
+            
             CurrentMilestone++;
             return;
         }
@@ -78,7 +85,11 @@ public class MilestonesManager : MonoBehaviour
     public void FinishLevel(){
             // Get difficulty manager's diff from level manager
             int diff = (int)GameObject.FindGameObjectsWithTag("LevelManager")[0].GetComponent<DifficultyManager>().difficultyLevel;
+            // GameObject LevelEndLoading = Instantiate(LevelEndLoadingPrefab, transform.position, Quaternion.identity);
+            // LevelEndLoading.transform.SetParent(ScreenPoint.transform);
+            GameObject.FindGameObjectWithTag("HudManager").GetComponent<HUDManager>().ToggleLoading(true);
             StateManager.LoadNewChapter(diff, CURRENT_LEVEL+1);
+            
 
     }
 

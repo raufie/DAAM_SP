@@ -245,8 +245,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t1score: {fileID: 1513770477}
   t2score: {fileID: 1570041669}
-  MainMenu: 2
+  MainMenu: 13
   btn: {fileID: 1769368641}
+  WaitTime: 5
 --- !u!1 &25284330
 GameObject:
   m_ObjectHideFlags: 0

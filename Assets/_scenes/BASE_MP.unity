@@ -1767,7 +1767,7 @@ GameObject:
   - component: {fileID: 314199393}
   m_Layer: 0
   m_Name: NetworkManager
-  m_TagString: Untagged
+  m_TagString: NetworkManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1802,7 +1802,7 @@ MonoBehaviour:
   runInBackground: 1
   autoStartServerBuild: 1
   serverTickRate: 30
-  offlineScene: Assets/_scenes/OfflineSceneError.unity
+  offlineScene: 
   onlineScene: 
   transport: {fileID: 314199394}
   networkAddress: localhost
@@ -1829,7 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bc07d20599754843ba5af31321bb8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 2
+  Type: 1
   LeaveGameBtn: {fileID: 659739620}
   MP_OPTIONS_SCENE: 0
 --- !u!114 &314199394
@@ -6924,36 +6924,6 @@ MonoBehaviour:
   - {fileID: 2091435875}
   EntryObjects: []
   LerpSpeed: 0
---- !u!1 &896346801
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 896346802}
-  m_Layer: 0
-  m_Name: DummyAuth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &896346802
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 896346801}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 895.84717, y: 482.37958, z: 320.8634}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &926397793
 GameObject:
   m_ObjectHideFlags: 0
@@ -7896,6 +7866,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126285147}
   m_CullTransparentMesh: 1
+--- !u!1 &1127860810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1127860812}
+  - component: {fileID: 1127860811}
+  m_Layer: 0
+  m_Name: GameSpecsMgmt
+  m_TagString: MPSpecs
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1127860811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127860810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53fef2f01d05e12429429d0ac413d39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameTime: 0.5
+--- !u!4 &1127860812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127860810}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8354607, y: 1.6046277, z: 20.97995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1139878767
 GameObject:
   m_ObjectHideFlags: 0
@@ -8804,6 +8818,7 @@ MonoBehaviour:
   Team1Score: 0
   Team2Score: 0
   manager: {fileID: 314199392}
+  GameTime: 5
 --- !u!114 &1299637633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12461,6 +12476,7 @@ MonoBehaviour:
   RotationSmoothTime: 0.12
   SENSITIVITY: 0
   SprintLimit: 0
+  Enabled: 1
 --- !u!114 &1901443718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13272,6 +13288,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioManager 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7043263481347680731, guid: 69d132650af0e2341b33bfca7ce4f0b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d132650af0e2341b33bfca7ce4f0b3, type: 3}
@@ -16553,6 +16574,7 @@ MonoBehaviour:
   SaveChangesBtn: {fileID: 417143840}
   DiscardChangesBtn: {fileID: 417143841}
   notification: {fileID: 0}
+  LoadingDisplay: {fileID: 0}
 --- !u!4 &3276069247959995257
 Transform:
   m_ObjectHideFlags: 0
@@ -17649,6 +17671,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1159370054}
     m_Modifications:
+    - target: {fileID: 7043263481347680728, guid: 69d132650af0e2341b33bfca7ce4f0b3,
+        type: 3}
+      propertyPath: musicAudioNames.Array.data[0]
+      value: lvl1
+      objectReference: {fileID: 0}
     - target: {fileID: 7043263481347680729, guid: 69d132650af0e2341b33bfca7ce4f0b3,
         type: 3}
       propertyPath: m_RootOrder
@@ -17766,7 +17793,7 @@ MonoBehaviour:
   QuitToWindows: {fileID: 397656360}
   MapToggle: {fileID: 1815098721}
   MapObject: {fileID: 1847094203}
-  MPBASESCENE: 0
+  MPBASESCENE: 13
 --- !u!4 &8195659712323604522
 Transform:
   m_ObjectHideFlags: 0

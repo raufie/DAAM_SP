@@ -39,6 +39,10 @@ public class MPWeaponsInput: MonoBehaviour
     }
     void EmitFire(InputAction.CallbackContext ctx){
         
+        if(playerObject == null){
+            RemoveEvents();
+            return;
+        }
         if(weaponsManager.GetCurrentWeapon().IsFireable()){
             MPThirdPersonController controller = playerObject.gameObject.GetComponent<MPThirdPersonController>();
             // controller.Aim(true, true, true, false);
@@ -96,6 +100,7 @@ public class MPWeaponsInput: MonoBehaviour
    
     public void disable(){
         RemoveEvents();
+        controls.Disable();
     }
     public void enable(){
         AddEvents();

@@ -28,7 +28,9 @@ Transform:
   m_LocalRotation: {x: 1.7032369e-14, y: 1, z: -0.00000008146034, w: 0.00000019470718}
   m_LocalPosition: {x: 0.6928446, y: 0.48665875, z: -0.019614115}
   m_LocalScale: {x: 0.05514584, y: 0.05514584, z: 0.027842699}
-  m_Children: []
+  m_Children:
+  - {fileID: 3451449710145839287}
+  - {fileID: 365638187213963891}
   m_Father: {fileID: 8915800512825463575}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,6 +84,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &295267386138391893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3451449710145839287}
+  m_Layer: 0
+  m_Name: Gun1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3451449710145839287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295267386138391893}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -19.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9165879735814127455}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1063705277667631876
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +373,36 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4687069614116648530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 365638187213963891}
+  m_Layer: 0
+  m_Name: Gun2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &365638187213963891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4687069614116648530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.008, y: -0.024, z: -19.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9165879735814127455}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5503075736778955249
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +583,10 @@ MonoBehaviour:
   DamagePoints: 15
   isDebug: 1
   debugSphere: {fileID: 1271637479580650653}
+  LaserPrefab: {fileID: 1483845746522260900, guid: ea3560808617ccd43bb7949b95a37d19,
+    type: 3}
+  Gun1: {fileID: 295267386138391893}
+  Gun2: {fileID: 4687069614116648530}
 --- !u!114 &8949197993843262387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,6 +650,7 @@ MonoBehaviour:
   AttackRadius: 15
   target: {fileID: 0}
   Eye: {fileID: 8138173819463748013}
+  isDebug: 0
 --- !u!114 &8138173819463748008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,7 +673,8 @@ MonoBehaviour:
   SlerpSpeed: 0.1
   isCalibrated: 0
   player: {fileID: 0}
-  CalibrationThreshold: 1
+  WalkingAudioTime: 0.2
+  CalibrationThreshold: 3
   CalibrationSlerpSpeed: 0.5
 --- !u!1 &8421761075032297620
 GameObject:

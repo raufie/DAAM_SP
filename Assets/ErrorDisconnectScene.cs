@@ -10,6 +10,8 @@ public class ErrorDisconnectScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         button.onClick.AddListener(()=>{
             SceneManager.LoadScene(MenuScene);
         });

@@ -20,6 +20,6 @@ public class AchievementsManager : MonoBehaviour
     public void OnDataFetch(){
         Deaths.text = ""+dataManager.Deaths;
         Kills.text = ""+dataManager.Kills;
-        KD.text = ""+dataManager.KD;        
+        KD.text = ""+dataManager.KD.ToString("N2");        
     }
 }

@@ -25,6 +25,10 @@ public class HUDManager : MonoBehaviour
 
     public Image CurrentWeaponImage;
     public TMP_Text Ammo;
+    public GameObject SceneEndLoadingCard;
+    // SHOWING MILESTONES AT START
+    private float timeStart;
+    public float MilestoneStartTimeout = 5f;
     // 
     // INTERNAL
     private InputMaster controls;
@@ -36,6 +40,9 @@ public class HUDManager : MonoBehaviour
         RefreshInput();
         playerObject = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerObject>();
     }    
+    void Start(){
+        timeStart = Time.time;
+    }
     void OnEnable(){
         LoadSettings();
     }
@@ -76,6 +83,12 @@ public class HUDManager : MonoBehaviour
         }else{
             MilestoneSprite.SetActive(false);
             MilestoneInformation.SetActive(false);
+        }
+
+        // SHOWING MILESTONE AT START 
+        if(Time.time < timeStart + MilestoneStartTimeout){
+            // FADE GROUP TO POSITIVE
+            ShowMilestonePoint();
         }
 
         // MilestoneSprite.GetComponent< = screenPos;
@@ -129,5 +142,8 @@ public class HUDManager : MonoBehaviour
         }
         controls.Enable();
         LoadSettings();
+    }
+    public void ToggleLoading(bool status){
+        SceneEndLoadingCard.SetActive(status);
     }
 }

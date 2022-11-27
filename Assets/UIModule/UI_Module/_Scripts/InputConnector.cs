@@ -25,6 +25,8 @@ public class InputConnector : MonoBehaviour
     public Button SaveChangesBtn;
     public Button DiscardChangesBtn;
     public NotificationsManager notification;
+
+    public GameObject LoadingDisplay;
     // slider.value
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,7 @@ public class InputConnector : MonoBehaviour
     void saveChanges(){
         // based on tab counter
         notification.ShowAlert("Saving Settings", "", Notification.NotificationType.LOADING, 5);
+        Debug.Log(TabToggler.curr);
         try{
             if(TabToggler.curr == 0){
                 Debug.Log("saving Audio Changes");
@@ -96,6 +99,7 @@ public class InputConnector : MonoBehaviour
             Debug.Log("qutting ");
             });
         if (ResumeBtn != null){
+            
         ResumeBtn.onClick.AddListener(ResumeGame);
         }
         if (ResumeInGameBtn != null){
@@ -103,10 +107,16 @@ public class InputConnector : MonoBehaviour
         }
     }
     void ResumeGame(){
+        if(LoadingDisplay != null){
+            LoadingDisplay.SetActive(true);
+        }
+        
         StateManager.ResumeState();
+
     }
     void ResumeGameInGame(){
         // Debug.Log("trynna switch");
+
         switchManager.EnableInputs();
     }
 }

@@ -1437,6 +1437,11 @@ MonoBehaviour:
   BurstWait: 2
   DamagePoints: 5
   isDebug: 1
+  anim: {fileID: 0}
+  LaserPrefab: {fileID: 1483845746522260900, guid: ea3560808617ccd43bb7949b95a37d19,
+    type: 3}
+  Gun1: {fileID: 3527530909409896212}
+  Gun2: {fileID: 3527530909409896212}
 --- !u!114 &4338417237191660965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,9 +1522,11 @@ MonoBehaviour:
   SlerpSpeed: 0.1
   isCalibrated: 0
   player: {fileID: 0}
+  WalkingAudioTime: 0.2
   CalibrationThreshold: 17
   CalibrationSlerpSpeed: 0.05
   type: 1
+  MeleeAttackRadius: 20
 --- !u!114 &4338417237191660986
 MonoBehaviour:
   m_ObjectHideFlags: 0

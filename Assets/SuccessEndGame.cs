@@ -11,8 +11,11 @@ public class SuccessEndGame : MonoBehaviour
     public int MainMenu;
     public Button btn;
     // Start is called before the first frame update
+    public float WaitTime = 5f;
+    private float StartTime;
     void Start()
     {
+        StartTime = Time.time;
         t1score.text = ""+PlayerPrefs.GetInt("t1score");
         t2score.text =""+ PlayerPrefs.GetInt("t2score");
         btn.onClick.AddListener(()=>{
@@ -21,8 +24,11 @@ public class SuccessEndGame : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if(Time.time > StartTime + WaitTime){
+            SceneManager.LoadScene(MainMenu);
+        }
         
     }
 }

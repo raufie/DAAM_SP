@@ -49,16 +49,46 @@ MonoBehaviour:
   - Rifle
   - RocketExhaust
   - Grenade
+  - FootStep
+  - SpiderStep
+  - TankStep
+  - TripodStep
+  - DroneStep
+  - BlastarTie
   sfxAudioSources:
   - {fileID: 3246026311021669885, guid: 8ea4d66bd1e4cb64fabfd30456fa92d0, type: 3}
   - {fileID: 3246026311021669885, guid: 736174db887a7804e91e81b9e85fc368, type: 3}
   - {fileID: 3246026311021669885, guid: 7cac78663d720d648a1b61d05f5ddcad, type: 3}
   - {fileID: 3246026311021669885, guid: c9b4dca351db14e4aacdb47f00353b1e, type: 3}
   - {fileID: 3246026311021669885, guid: 39aad311183b09b4a988de5089297ac8, type: 3}
+  - {fileID: 3246026311021669885, guid: 6ffaafb4690982f4080a312126a3a4a9, type: 3}
+  - {fileID: 3246026311021669885, guid: dcbdb483672c75f45afbd0dbf778ac95, type: 3}
+  - {fileID: 3246026311021669885, guid: 9855990c55f7a374fb4ade34278956d0, type: 3}
+  - {fileID: 3246026311021669885, guid: 5017f50f3ca91574a9a18693e5406ca2, type: 3}
+  - {fileID: 3246026311021669885, guid: 889d44d95f5d8a648aad1459bd00ee73, type: 3}
+  - {fileID: 3246026311021669885, guid: ed7ca025bf7952f49a9fd0ac6a6518d0, type: 3}
   musicAudioNames:
-  - lvl1wp1
+  - lvl1
+  - lvl2
+  - lvl3
+  - lvl4
+  - lvl5
+  - lvl6
+  - lvl7
+  - lvl8
+  - lvl9
+  - lvl10
   musicAudioSources:
   - {fileID: 3246026311021669885, guid: d2c71f2960fc16f478264e93d6bbbc88, type: 3}
+  - {fileID: 3246026311021669885, guid: 56893a457fd98ca4e83e0f3aa7b0dc56, type: 3}
+  - {fileID: 3246026311021669885, guid: c7cf36c7444508241af1d85d009222d9, type: 3}
+  - {fileID: 3246026311021669885, guid: 24256808ab3175b48842e3c960a1d34e, type: 3}
+  - {fileID: 3246026311021669885, guid: 5cb37b9aa681f13458bac68c3576508e, type: 3}
+  - {fileID: 3246026311021669885, guid: ddd12f6dca3470d4d993ec6a7dcdc17f, type: 3}
+  - {fileID: 3246026311021669885, guid: e7d521758bd4f714b8cdf33945aa0160, type: 3}
+  - {fileID: 3246026311021669885, guid: 70411115daba5cd44923398dd1d7834a, type: 3}
+  - {fileID: 3246026311021669885, guid: 8cd0c38684dbb4e41b00d960bfed0f2e, type: 3}
+  - {fileID: 3246026311021669885, guid: bd2707e51963e774aa0d35771f48d295, type: 3}
   sfxVolume: 1
   bgmVolume: 1
   masterVolume: 0.7

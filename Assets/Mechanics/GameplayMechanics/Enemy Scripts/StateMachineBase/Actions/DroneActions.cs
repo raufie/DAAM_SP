@@ -10,6 +10,8 @@ public class DroneActions : ActionBase
         base.Awake();
 
         actions = GetComponent<DroneController>();
+        AudioType = "DroneStep";
+        WalkingAudioTime = 2f;
     }
     public override void Patrol(){
       

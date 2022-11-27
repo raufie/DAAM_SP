@@ -20,17 +20,19 @@ public class GrenadeProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ( Time.time > timeStarted + timer){
-            Explode(damagePoints, radius);
-        }
+        
    
 
     }
-
+    void FixedUpdate(){
+        if ( Time.time > timeStarted + timer){
+            Explode(damagePoints, radius);
+        }
+    }
     // launch
     public void Launch(Vector3 direction){
         timeStarted = Time.time;
-        gameObject.GetComponent<Rigidbody>().velocity = direction*20;
+        gameObject.GetComponent<Rigidbody>().velocity = direction*40;
     }
 
     // explode

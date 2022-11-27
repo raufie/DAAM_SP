@@ -114,7 +114,7 @@ public class ThirdPersonController : MonoBehaviour
     public float maxSprintAbility  = 4f;
     float speed = 5f; 
     float sprintSpeed = 10f;
-    float sprintAbility = 4f;
+    public float sprintAbility = 4f;
     float lastJumped = 0f;
     float jumpTime = 2f;
     void Awake(){

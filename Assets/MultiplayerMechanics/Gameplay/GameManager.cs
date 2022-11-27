@@ -27,9 +27,26 @@ public class GameManager : NetworkBehaviour
     // Hold All Player infos
     public readonly SyncList<PlayerEntry> Players = new SyncList<PlayerEntry>();
     public MyNetworkManager manager;
+    public float GameTime = 10f;
     
     // Start is called before the first frame update
 
+    void  FixedUpdate(){
+         if(isServer){
+            MPSpecs specs = GameObject.FindGameObjectsWithTag("MPSpecs")[0].GetComponent<MPSpecs>();
+            MyNetworkManager manager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
+            float remainingTime = specs.GameTime*60 - ((float)NetworkTime.time-manager.StartTime);
+            Debug.Log(remainingTime);
+            if(remainingTime <=-5f){
+                Debug.Log("TRYNNA KILL SERVER");
+                // LEAVE GAME AND SWITCH SCENE
+                manager.StopServer();
+                Application.Quit();
+                // SceneManager.LoadScene(16);
+            }
+        
+        }
+    }
     void Update(){
         // GetComponent<MyNetworkManager>().NetworkServer.connections;
     }
@@ -42,6 +59,7 @@ public class GameManager : NetworkBehaviour
             Team2Score += 1;
         }
     }
+    
 
     public void ScoreChange(int oldVal, int newVal){
         PlayerPrefs.SetInt("t1score", Team1Score);
@@ -222,4 +240,5 @@ public class GameManager : NetworkBehaviour
         NetworkServer.Spawn(rocketInstance);
         
     }
+    
 }

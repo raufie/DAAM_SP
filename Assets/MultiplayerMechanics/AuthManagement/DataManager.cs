@@ -59,7 +59,8 @@ public class DataManager : MonoBehaviour
                     
                 }
                 if(Deaths!= 0){
-                    KD = Kills/Deaths;
+                    KD = (float)Kills/(float)Deaths;
+                    // Debug.Log(KD);
                 }
                     
                 OnUpdate();

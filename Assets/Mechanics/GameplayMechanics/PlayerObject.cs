@@ -66,6 +66,7 @@ public class PlayerObject : MonoBehaviour
     }
     private void KillPlayer(){
         Debug.Log("Player is dead");
+        GameObject.FindGameObjectWithTag("InputManagement").GetComponent<InputManagement>().disable();
         GetComponent<Animator>().enabled = false;
         EnableRagdoll();
         DeadObject.SetActive(true);

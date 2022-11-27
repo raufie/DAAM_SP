@@ -39,7 +39,12 @@ public class MovementInput : MonoBehaviour
     // SPRINT CAPPING
     private float LastSprintTime;
     public float SprintLimit;
-    
+    // WALKING
+    private float TimeFromLastStep;
+    private bool IsWalking;
+    public float WalkingAudioTime = 0.56f;
+    public float SprintingAudioTime = 0.25f;
+
     // CAMS
     void Awake(){
         playerObject = GetComponent<InputManagement>().Player;
@@ -62,7 +67,12 @@ public class MovementInput : MonoBehaviour
             isAiming = true;
         }
         controller.Move(moveVector, isSprinting, isCrouching, isAiming);
-
+        if(moveVector != Vector2.zero){
+            WalkSound(isSprinting && controller.sprintAbility != 0);
+        }else{
+            TimeFromLastStep = 0f;
+            IsWalking = false;
+        }
         controller.Jump(jumpInput, isAiming, isHoldingShoot);
         // UPDATE LOOK VECTOR
        _lookVector = controls.Player.Look.ReadValue<Vector2>();
@@ -111,6 +121,28 @@ public class MovementInput : MonoBehaviour
             if (lfAngle < -360f) lfAngle += 360f;
             if (lfAngle > 360f) lfAngle -= 360f;
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
+    }
+    private void WalkSound( bool isSprinting){
+        try{
+            AudioManager audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+            // audioManager.fireSFXEvent("FootStep", playerObject.transform.position);
+            if(IsWalking){
+                Debug.Log("setting time");
+                TimeFromLastStep = Time.time;
+            }
+            float TimeToStep = WalkingAudioTime;
+            if(isSprinting){
+                TimeToStep = SprintingAudioTime;
+            }
+            if(Time.time > TimeFromLastStep + TimeToStep ){
+                audioManager.fireSFXEvent("FootStep", playerObject.transform.position);
+                TimeFromLastStep = Time.time;
+            }
+                      
+        }catch{
+            IsWalking = false;
+            Debug.Log("ERROR INITIALIZING FOOTSTEL");
+        }
     }
     private void OnEnable(){
         controls.Enable();

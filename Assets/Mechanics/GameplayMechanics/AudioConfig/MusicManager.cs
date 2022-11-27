@@ -12,7 +12,13 @@ public class MusicManager : MonoBehaviour
     // VIP THAT areasOfImportance.Length == musicTracks
     // level music stack
     void Start(){
-        setTrack("lvl1wp1");
+        try{
+        int currentLevel = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<MilestonesManager>().CURRENT_LEVEL;
+        setTrack("lvl"+currentLevel);
+        }catch {
+        setTrack("lvl1");
+        }
+        // get level , set based on that
     }
 
     // NOT ADVISED FOR A LINEAR SOUNDTRACK experience
@@ -21,6 +27,7 @@ public class MusicManager : MonoBehaviour
         updatePlayback();
     }
     public void updatePlayback(){
+        Debug.Log("current track:"+currentTrack);
         audioManager.startBGM(currentTrack);
     }
     public void next(){

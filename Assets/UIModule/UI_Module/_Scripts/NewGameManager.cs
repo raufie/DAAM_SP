@@ -8,6 +8,7 @@ public class NewGameManager : MonoBehaviour
     public Button [] Difficulties = new Button[3];
     public Button StartButton;
     private int selectedDiff;
+    public GameObject LoadingDisplay;
     void Start(){
         for (int i = 0; i < Difficulties.Length; i++){
             int tempI = i;
@@ -17,6 +18,9 @@ public class NewGameManager : MonoBehaviour
         }
 
         StartButton.onClick.AddListener(()=>{
+            if(LoadingDisplay != null){
+                LoadingDisplay.SetActive(true);
+            }
             StateManager.StartNew(selectedDiff);
         });
     }

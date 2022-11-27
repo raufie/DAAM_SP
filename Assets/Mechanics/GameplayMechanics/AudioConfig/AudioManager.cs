@@ -58,6 +58,11 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+    void FixedUpdate(){
+        // Debug.Log("WALKING", isWalking);
+        // Debug.Log("Running", isRunning);
+        // WALK/RUN
+    }
     public GameObject fireSFXEvent(string type, Vector3 position){
         GameObject audioObject = null;
         try{
@@ -80,26 +85,41 @@ public class AudioManager : MonoBehaviour
         return audioObject;
     }
     public void startBGM(string type){
-        MusicObjects[type].GetComponent<AudioObject>().audioSource.volume = bgmVolume*masterVolume;
-        Destroy(currentMusicTrack.gameObject);
-        currentMusicTrack = Instantiate(MusicObjects[type], transform.position, Quaternion.identity);
+
+        
+        try{
+            MusicObjects[type].GetComponent<AudioObject>().audioSource.volume = bgmVolume*masterVolume;
+            Destroy(currentMusicTrack.gameObject);
+            currentMusicTrack = Instantiate(MusicObjects[type], transform.position, Quaternion.identity);
+        }catch{
+            Debug.Log("error destroying game object");
+        }
+        
 
     }
     public void load(){
+        Debug.Log("loading audio");
         masterVolume = (float)PlayerPrefs.GetFloat("masterVolume");
         sfxVolume = (float)PlayerPrefs.GetFloat("sfxVolume");
         bgmVolume = (float)PlayerPrefs.GetFloat("bgmVolume");
+        for(int i = 0; i < sfxAudioSources.Length;i++){
+            try{
+                sfxAudioSources[i].GetComponent<AudioObject>().audioSource.volume = sfxVolume*masterVolume;
+            }catch{
+                    
+            }
+        }
         try{
         currentMusicTrack.GetComponent<AudioObject>().audioSource.volume = bgmVolume*masterVolume;
         }catch{
             
         }
     }
-    public void save(){
-        PlayerPrefs.SetFloat("masterVolume", masterVolume);
-        PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
-        PlayerPrefs.SetFloat("bgmVolume", bgmVolume);
+    public void save(float _masterVolume, float _sfxVolume, float _bgmVolume){
+        PlayerPrefs.SetFloat("masterVolume", _masterVolume);
+        PlayerPrefs.SetFloat("sfxVolume", _sfxVolume);
+        PlayerPrefs.SetFloat("bgmVolume", _bgmVolume);
         PlayerPrefs.Save();
-
+        load();
     }
 }

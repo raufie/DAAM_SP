@@ -11,6 +11,7 @@ public class ListManager : MonoBehaviour
     public Button AcceptBtn;
     public Button RejectBtn;
     public int SelectedIndex = -1;
+    public GameObject LoadingDisplay;
     void Start(){
         LoadOptions();
         LoadListGUI();
@@ -22,6 +23,9 @@ public class ListManager : MonoBehaviour
     void Accept(){
         // call accept of relevant option
         // on load
+        if(LoadingDisplay != null){
+            LoadingDisplay.SetActive(true);
+        }
         StateManager.LoadState(options[SelectedIndex].id);
     }
     void OnEnable(){

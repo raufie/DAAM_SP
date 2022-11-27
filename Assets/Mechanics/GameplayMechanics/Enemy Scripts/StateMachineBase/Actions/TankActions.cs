@@ -9,6 +9,8 @@ public class TankActions : ActionBase
     {
         actions = GetComponent<TankController>();
         base.Awake();
+        AudioType = "TankStep";
+        WalkingAudioTime = 25f;
     }
     public override void Patrol(){
         GetDesiredDirection();

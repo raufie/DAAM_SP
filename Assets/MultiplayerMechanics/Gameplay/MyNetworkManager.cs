@@ -51,6 +51,9 @@ public class MyNetworkManager : NetworkManager
     /// </summary>
     public override void LateUpdate()
     {
+        // GAME ENDING
+       
+        // CHECK FOR TIME
         base.LateUpdate();
     }
 
@@ -212,6 +215,7 @@ public class MyNetworkManager : NetworkManager
     /// </summary>
     public override void OnClientDisconnect()
     {
+        // SceneManager.LoadScene(15);
         base.OnClientDisconnect();
     }
 
@@ -219,8 +223,10 @@ public class MyNetworkManager : NetworkManager
     /// Called on clients when a servers tells the client it is no longer ready.
     /// <para>This is commonly used when switching scenes.</para>
     /// </summary>
-    public override void OnClientNotReady() { }
-
+    public override void OnClientNotReady() { 
+        SceneManager.LoadScene(15);
+    }
+    
     /// <summary>
     /// Called on client when transport raises an exception.</summary>
     /// </summary>

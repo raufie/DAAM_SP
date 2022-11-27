@@ -35,14 +35,17 @@ public class WeaponsManager : MonoBehaviour
     }
     void Start()
     {
-        SwitchWeapon(1);
+        
         audioManager = GameObject.FindGameObjectsWithTag("AudioManager")[0].GetComponent<AudioManager>();
-
+        SwitchWeapon(1);
+        SwitchWeapon(0);
+        SwitchWeapon(1);
         
     }
     void Update (){
         weapons[(int)currentWeapon].DrawRay();
         weapons[(int)currentWeapon].IsReloaded();
+        
     }
     // FOR INPUTMAPPER
     public void FireSemiWeapon(){
@@ -72,12 +75,15 @@ public class WeaponsManager : MonoBehaviour
     }
 
     public void SwitchWeapon(int to){
+        Debug.Log("TRYNNA SWITCH WEAPON");
         currentWeapon = (CurrentWeapon)to;
         SwitchToAsset(to);
         // Debug.Log(currentWeapon);
         // SWITCH THE ASSET
     }
     private void SwitchToAsset(int to){
+        Debug.Log("SWITCHING TO");
+        Debug.Log(to);
         for(int i = 0; i < weaponAssets.Length; i++){
             if (to == i){
                 weaponAssets[i].SetActive(true);

@@ -37,6 +37,11 @@ public class TripodController : MonoBehaviour
     private int CurrentBurst;
     private float LastBurstEnd;
 
+// 
+    public GameObject LaserPrefab;
+    // GUNS
+    public GameObject Gun1;
+    public GameObject Gun2;
     void Start()
     {
 
@@ -72,7 +77,9 @@ public class TripodController : MonoBehaviour
     }
 
     public void Fire(bool aimed = false){
+        
         if(Time.time > LastFired + FireRate && Time.time > LastBurstEnd + BurstWait){
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().fireSFXEvent("BlastarTie",transform.position);
             LastFired = Time.time;
             CurrentBurst+=1;
             HitRay(aimed);
@@ -107,6 +114,7 @@ public class TripodController : MonoBehaviour
     }
 
     public void HitRay(bool aimed = false){
+        Vector3 p2;
         Vector3 direction = new Vector3(0,0,0);
         if(aimed){
             direction = GetComponent<ObservationBase>().target.transform.position - FirePoint.position;
@@ -119,6 +127,12 @@ public class TripodController : MonoBehaviour
             if(hit.collider.tag == "Player"){
                 hit.collider.gameObject.GetComponent<PlayerObject>().takeDamage(DamagePoints);
             }
+            p2 = hit.point;
+            GameObject LaserObject = Instantiate(LaserPrefab, transform.position, Quaternion.identity);
+            LaserObject.GetComponent<LaserManager>().LaunchConnected(Gun1.transform.position,p2);
+
+            GameObject LaserObject2 = Instantiate(LaserPrefab, transform.position, Quaternion.identity);
+            LaserObject2.GetComponent<LaserManager>().LaunchConnected(Gun2.transform.position,p2);
         }
     }
     

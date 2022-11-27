@@ -24,7 +24,9 @@ public class WeaponsInput: MonoBehaviour
         AddEvents();
                
     }
-
+    void Start(){
+        
+    }
     void EmitFire(InputAction.CallbackContext ctx){
         
         if(weaponsManager.GetCurrentWeapon().IsFireable()){

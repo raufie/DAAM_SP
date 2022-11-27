@@ -14,6 +14,13 @@ public class ActionBase : MonoBehaviour
     public bool isCalibrated;
     public GameObject player;
     // Start is called before the first frame update
+    // WALK SOUND ANIMS
+    protected float TimeFromLastStep;
+    protected bool IsWalking;
+    public float WalkingAudioTime = 0.2f;
+    protected string AudioType = "SpiderStep";
+    // LASER PREFAB
+    
     protected void Awake()
     {
         // SetAttributes();
@@ -27,9 +34,14 @@ public class ActionBase : MonoBehaviour
         // SetAttributes();
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerObject>().BodyTarget;
     }
-    void FixedUpdate(){
+    public void FixedUpdate(){
         // Patrol();
-    
+        if(GetComponent<StateMachine>().currentState.name == State.STATE.PATROLLING ||
+        GetComponent<StateMachine>().currentState.name == State.STATE.CHASING ||
+        GetComponent<StateMachine>().currentState.name == State.STATE.CALIBRATING
+        ){
+            WalkSound();
+        }
     }
     
     public virtual void Patrol(){}
@@ -63,6 +75,25 @@ public class ActionBase : MonoBehaviour
             Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
         }
 
+    }
+    protected void WalkSound(){
+        try{
+            AudioManager audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+            // audioManager.fireSFXEvent("FootStep", playerObject.transform.position);
+            if(IsWalking){
+                Debug.Log("setting time");
+                TimeFromLastStep = Time.time;
+            }
+            float TimeToStep = WalkingAudioTime;
+            if(Time.time > TimeFromLastStep + TimeToStep ){
+                audioManager.fireSFXEvent(AudioType, transform.position);
+                TimeFromLastStep = Time.time;
+            }
+                      
+        }catch{
+            IsWalking = false;
+            Debug.Log("ERROR INITIALIZING FOOTSTEL");
+        }
     }
     
 }

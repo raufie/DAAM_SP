@@ -35,7 +35,10 @@ public class DroneController : MonoBehaviour
     private float LastFired;
     private int CurrentBurst;
     private float LastBurstEnd;
-
+    // LASER
+    public GameObject LaserPrefab;
+    public GameObject Gun1;
+    public GameObject Gun2;
     void Start()
     {
 
@@ -85,6 +88,8 @@ public class DroneController : MonoBehaviour
 
     public void Fire(){
         if(Time.time > LastFired + FireRate && Time.time > LastBurstEnd + BurstWait){
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().fireSFXEvent("BlastarTie",transform.position);
+
             LastFired = Time.time;
             CurrentBurst+=1;
             HitRay();
@@ -98,12 +103,21 @@ public class DroneController : MonoBehaviour
 
     public void HitRay(){
         RaycastHit hit;
+        Vector3 p2;
         if(Physics.Raycast(FirePoint.position, transform.forward, out hit, Mathf.Infinity)){
             Debug.Log(hit.collider.tag);
             if(hit.collider.tag == "Player"){
                 hit.collider.gameObject.GetComponent<PlayerObject>().takeDamage(DamagePoints);
+                
             }
+            p2 = hit.point;
+            GameObject LaserObject = Instantiate(LaserPrefab, transform.position, Quaternion.identity);
+            LaserObject.GetComponent<LaserManager>().LaunchConnected(Gun1.transform.position,p2);
+
+            GameObject LaserObject2 = Instantiate(LaserPrefab, transform.position, Quaternion.identity);
+            LaserObject2.GetComponent<LaserManager>().LaunchConnected(Gun2.transform.position,p2);
         }
+        
     }
 
     private bool isGrounded(){

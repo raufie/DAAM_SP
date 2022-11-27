@@ -39,7 +39,7 @@ public class MPMovementInput : MonoBehaviour
     // SPRINT CAPPING
     private float LastSprintTime;
     public float SprintLimit;
-    
+    public bool Enabled = true;
     // CAMS
     void Awake(){
         // playerObject = GetComponent<InputManagement>().Player;
@@ -61,15 +61,18 @@ public class MPMovementInput : MonoBehaviour
         if(isHoldingShoot == true){
             isAiming = true;
         }
+        if(Enabled){
         controller.Move(moveVector, isSprinting, isCrouching, isAiming);
 
         controller.Jump(jumpInput, isAiming, isHoldingShoot);
         // UPDATE LOOK VECTOR
        _lookVector = controls.Player.Look.ReadValue<Vector2>();
+        }
 
 
     }
     void FixedUpdate(){
+
         bool isSprinting = controls.Player.Sprint.ReadValue<float>() == 1.0f ;
         bool isShooting = controls.Player.Shoot.triggered ;
         bool isAiming = controls.Player.Aim.ReadValue<float>() >0.0;
@@ -78,8 +81,9 @@ public class MPMovementInput : MonoBehaviour
         if(isHolding == true){
             isAiming = true;
         }
-        controller.Aim(isShooting, isAiming, isHolding, isSprinting);
-        
+        if(Enabled){
+            controller.Aim(isShooting, isAiming, isHolding, isSprinting);
+        }
     }
 
     private void LateUpdate(){

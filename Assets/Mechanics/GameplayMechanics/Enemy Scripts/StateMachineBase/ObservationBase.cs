@@ -25,8 +25,10 @@ public class ObservationBase : MonoBehaviour
 
     }
     public bool IsPlayerVisible(){
+        // FOR DEBUG ONLY
         // combination of (is player blocked and is it in the viewing angle)
-        if (!IsBlocked() && IsInView()){
+        // if (!IsBlocked() && IsInView()){
+        if(IsInView()){
             return true;
         }
         return false;

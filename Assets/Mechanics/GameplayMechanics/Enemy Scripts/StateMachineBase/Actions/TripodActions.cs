@@ -16,6 +16,15 @@ public class TripodActions : ActionBase
     {
         actions = GetComponent<TripodController>();
         base.Awake();
+        AudioType = "TripodStep";
+        WalkingAudioTime = 1f;
+    }
+    void FixedUpdate(){
+        base.FixedUpdate();
+        if(GetComponent<StateMachine>().currentState.name == State.STATE.ATTACKING 
+        ){
+            WalkSound();
+        }
     }
     public override void Patrol(){
         GetDesiredDirection();

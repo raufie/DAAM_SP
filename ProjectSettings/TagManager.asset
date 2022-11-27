@@ -21,6 +21,9 @@ TagManager:
   - p5
   - p6
   - PlayerWrapper
+  - CreditsManager
+  - MPSpecs
+  - NetworkManager
   layers:
   - Default
   - TransparentFX

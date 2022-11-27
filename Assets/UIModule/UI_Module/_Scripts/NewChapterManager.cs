@@ -25,6 +25,7 @@ public class NewChapterManager : MonoBehaviour
     // STATES
     private int currentState;
     private int unlocked;
+    public GameObject LoadingDisplay;
 
     public void Start(){
         unlocked = PlayerPrefs.GetInt("unlocked");
@@ -59,6 +60,9 @@ public class NewChapterManager : MonoBehaviour
     public void LoadChapter(){
         if(currentState+1 <= unlocked){
         // Debug.Log("Trynna switch a level");
+        if(LoadingDisplay != null){
+            LoadingDisplay.SetActive(true);
+        }
         StateManager.StartNew(DifficultyDropdown.value, currentState+1);
         
         }else {

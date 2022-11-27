@@ -38,7 +38,7 @@ public class NetworkConnector : MonoBehaviour
             // if u wanna add manually
         }
     }
-
+    
     void LeaveGame(){
         manager.StopClient();
         SceneManager.LoadScene(MP_OPTIONS_SCENE);

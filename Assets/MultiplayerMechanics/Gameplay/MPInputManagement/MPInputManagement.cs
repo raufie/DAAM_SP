@@ -35,8 +35,11 @@ public class MPInputManagement : MonoBehaviour
     }
 
    void Update(){
+    
         if (NetworkClient.localPlayer != null && Player == null){
+            
             Player = NetworkClient.localPlayer.gameObject;
+
             Player = Player.GetComponent<NetworkPlayerObject>().PlayerObject;
             movementInput = GetComponent<MPMovementInput>();
             weaponsInput = GetComponent<MPWeaponsInput>();
@@ -56,15 +59,17 @@ public class MPInputManagement : MonoBehaviour
         movementInput.SENSITIVITY = PlayerPrefs.GetFloat("sensitivity");
     }
     public void disable(){
+        movementInput.Enabled = false;
         weaponsInput.disable();
         // mountedInput.disable();
         movementInput.enabled = false;
+        
         weaponsInput.enabled = false;
         Player.GetComponent<ThirdPersonController>().cursorDisabled = false;
         // should disable the scripts and show the cursor
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        gameObject.GetComponent<InputManagement>().enabled = false;
+        gameObject.GetComponent<MPInputManagement>().enabled = false;
 
     }
     public void enable(){

@@ -31,6 +31,7 @@ public class NetworkPlayerObject : NetworkBehaviour
     public Material Team1Mat;
     public Material Team2Mat;
     public GameObject ShirtObject;
+    
     void Awake(){
         if(isLocalPlayer){
         ID = Guid.NewGuid().ToString();
@@ -107,9 +108,20 @@ public class NetworkPlayerObject : NetworkBehaviour
     }
     void FixedUpdate(){
         if(isLocalPlayer){
-            float remainingTime = 10*60 - ((float)NetworkTime.time-StartTime);
+            MPSpecs specs = GameObject.FindGameObjectsWithTag("MPSpecs")[0].GetComponent<MPSpecs>();
+            float remainingTime = specs.GameTime*60 - ((float)NetworkTime.time-StartTime);
             GameObject.FindGameObjectsWithTag("HudManager")[0].GetComponent<MPHudManager>().UpdateTime(remainingTime );
+
+            if(remainingTime <=0f){
+                // LEAVE GAME AND SWITCH SCENE
+                // NetworkClient.StopClient();
+                GameObject.FindGameObjectWithTag("InputManagement").GetComponent<MPInputManagement>().disable();
+                GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>().StopClient();
+                SceneManager.LoadScene(16);
+            }
+        
         }
+        
     }
     [Command]
     public void CmdUpdatePlayerInfo(string username,int team, int id, int kills, int deaths  ){
@@ -151,12 +163,15 @@ public class NetworkPlayerObject : NetworkBehaviour
         Debug.Log(dead.GetComponent<NetworkPlayerObject>().ID);
         string deadUsernamme = gameManager.GetUsernameByNetID((int)dead.GetComponent<NetworkPlayerObject>().netId);
         // string dead = gameManager.GetUsername(deadId);
-        UpdatePlayer(team, index, kills, deaths);
-        
-        
-        PushClientKillUpdate(killerUsername, deadUsernamme );
-        
-        
+        UpdatePlayer(team, index, kills, deaths);       
+        PushClientKillUpdate(killerUsername, deadUsernamme );       
+
+        UpdatePrefsScore(gameManager.Team1Score, gameManager.Team2Score);
+    }
+    [ClientRpc]
+    public void UpdatePrefsScore(int t1 ,int t2){
+        PlayerPrefs.SetInt("t1score", t1);
+        PlayerPrefs.SetInt("t2score", t2);
     }
     [Command]
     public void CmdAddDeath(string id){

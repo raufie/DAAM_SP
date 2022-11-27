@@ -12,6 +12,11 @@ public class UIActions : MonoBehaviour
         PlayerPrefs.SetFloat("sfxVolume", sfx);
         PlayerPrefs.SetFloat("bgmVolume", music);
         PlayerPrefs.Save();
+        try{
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().save(master, sfx, music);
+        }catch {
+            Debug.Log("error getting audiomanager");
+        }
     }
     public void saveControlSettings(){
         rebinding.SaveBindings();
